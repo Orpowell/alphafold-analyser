@@ -15,7 +15,7 @@
 <pre><code>mv alphafold-analyser.py /usr/local/bin/</code></pre>
 <p>As regular user:</p>
 <pre><code>sudo mv alphafold-analyser.py /usr/local/bin/</code></pre>
-<p>A.V.A should now run from the shell or Terminal using the command ava.py</p>
+<p>alphafold-analyser.py should now run from the shell or Terminal using the command ava.py</p>
 <p>Alternatively, alphafold-analyser.py can be run directly from an IDE.</p>
 <h2 id="alphafold-settings-for-the-analyser">AlphaFold Settings for the Analyser</h2>
 <p>For the programme to function correctly, the model names parameter should label the first two models in alphafold as model_1 and model_2_ptm. An example of how this parameter should be written when running AlphaFold is shown below.</p>
@@ -37,7 +37,7 @@ Protein: The name of protein being analysed. This will be used to label all file
 <h2 id="outputs">Outputs</h2>
 <p>AlphaFold Analyser has produces two outputs:</p>
 
-<li> - A PyMol session labelled with the protein input (e.g protein.pse). This will  contain the highest confidence structure predicted by AlphaFold. The individual residues of the structure are coloured according to their pLDDT on colour spectrum from yellow to green to blue (low to high confidence).</li>
+<li>A PyMol session labelled with the protein input (e.g protein.pse). This will  contain the highest confidence structure predicted by AlphaFold. The individual residues of the structure are coloured according to their pLDDT on colour spectrum from yellow to green to blue (low to high confidence).</li>
 
 <li>A predicted alignment error plot again labelled with the protein input (e.g protein-pae.png). The plot is colored by the confidence values for each residue using the same colour scheme as the PyMol session.</li>
 <h2 id="comments">Comments</h2>
