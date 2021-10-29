@@ -24,18 +24,21 @@
 <p>All files output by alphafold are stored in a single directory. However, only the ranked_0.pdb and results_model_2_ptm.pkl file are needed for analysis.</p>
 <h2 id="running-alphafold-analyser">Running AlphaFold Analyser</h2>
 <p>A directory should be created containing all necessary files (see above). AlphaFold Analyser will then ask for the following inputs:</p>
-<pre><code>- Input Directory: The file path for the directory containing the alphafold results files
 
-- Output Directory: The file path for the directory where the Analyser results will be
+Input Directory: The file path for the directory containing the alphafold results files
+
+Output Directory: The file path for the directory where the Analyser results will be
                     stored.
                     
-- Protein: The name of protein being analysed. This will be used to label all files
-           and the directory created during the analysis.</code></pre>
+Protein: The name of protein being analysed. This will be used to label all files
+           and the directory created during the analysis
+
+
 <h2 id="outputs">Outputs</h2>
 <p>AlphaFold Analyser has produces two outputs:</p>
-<p>A PyMol session, {Protein}.pse, containing the highest confidence predicted structure. The individual residues of the structure are coloured according to their pLDDT with the following colour spectrum from low to high:</p>
-<pre><code>                        (Low Confidence) Yellow -&gt; Green -&gt; Blue (High Confidence)
-                        </code></pre>
-<p>A predicted alignment error plot, {protein}-pae.png, that colours the confidence values for each residue using the same colour scheme shown above.</p>
+
+<p>A PyMol session labelled with the protein input (e.g protein.pse). This will  contain the highest confidence structure predicted by AlphaFold. The individual residues of the structure are coloured according to their pLDDT on colour spectrum from yellow to green to blue (low to high confidence).<p>
+
+<p>A predicted alignment error plot again labelled with the protein input (e.g protein-pae.png). The plot is colored by the confidence values for each residue using the same colour scheme as the PyMol session.</p>
 <h2 id="comments">Comments</h2>
 <p>Future work may involve allowing for multiple inputs at once.</p>
