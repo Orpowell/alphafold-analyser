@@ -37,8 +37,8 @@ Protein: The name of protein being analysed. This will be used to label all file
 <h2 id="outputs">Outputs</h2>
 <p>AlphaFold Analyser has produces two outputs:</p>
 
-<p>A PyMol session labelled with the protein input (e.g protein.pse). This will  contain the highest confidence structure predicted by AlphaFold. The individual residues of the structure are coloured according to their pLDDT on colour spectrum from yellow to green to blue (low to high confidence).<p>
+<p> - A PyMol session labelled with the protein input (e.g protein.pse). This will  contain the highest confidence structure predicted by AlphaFold. The individual residues of the structure are coloured according to their pLDDT on colour spectrum from yellow to green to blue (low to high confidence).<p>
 
-<p>A predicted alignment error plot again labelled with the protein input (e.g protein-pae.png). The plot is colored by the confidence values for each residue using the same colour scheme as the PyMol session.</p>
+<p> - A predicted alignment error plot again labelled with the protein input (e.g protein-pae.png). The plot is colored by the confidence values for each residue using the same colour scheme as the PyMol session.</p>
 <h2 id="comments">Comments</h2>
 <p>Future work may involve allowing for multiple inputs at once.</p>
