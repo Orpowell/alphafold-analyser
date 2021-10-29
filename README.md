@@ -15,7 +15,7 @@
 <pre><code>mv alphafold-analyser.py /usr/local/bin/</code></pre>
 <p>As regular user:</p>
 <pre><code>sudo mv alphafold-analyser.py /usr/local/bin/</code></pre>
-<p>alphafold-analyser.py should now run from the shell or Terminal using the command ava.py</p>
+<p>alphafold-analyser.py should now run from the shell or Terminal using the command alphafold-analyser.py</p>
 <p>Alternatively, alphafold-analyser.py can be run directly from an IDE.</p>
 <h2 id="alphafold-settings-for-the-analyser">AlphaFold Settings for the Analyser</h2>
 <p>For the programme to function correctly, the model names parameter should label the first two models in alphafold as model_1 and model_2_ptm. An example of how this parameter should be written when running AlphaFold is shown below.</p>
