@@ -120,7 +120,3 @@ if __name__ == '__main__':
     output_directory, result_dir, protein = get_output()  # Input File path for directory containing results
     pae_plotter()   # Generate a PAE plot
     protein_painter()   # Create a PyMol Session
-
-# /Users/oliverpowell/Library/CloudStorage/OneDrive-NorwichBioScienceInstitutes/laetitia-book-chapter-figure/alphafold
-# /Users/oliverpowell/Library/CloudStorage/OneDrive-NorwichBioScienceInstitutes/laetitia-book-chapter-figure/alphafold
-# yeast-erg24-D286N
