@@ -121,6 +121,6 @@ if __name__ == '__main__':
     pae_plotter()   # Generate a PAE plot
     protein_painter()   # Create a PyMol Session
 
-# /Users/oliverpowell/OneDrive - Norwich BioScience Institutes/alphafold/data/predictions/yeast-erg24-mutants/yeast-erg24-V290L
-# /Users/oliverpowell/OneDrive - Norwich BioScience Institutes/alphafold/analysis/yeast-erg24-mutants/
+# /Users/oliverpowell/Library/CloudStorage/OneDrive-NorwichBioScienceInstitutes/laetitia-book-chapter-figure/alphafold
+# /Users/oliverpowell/Library/CloudStorage/OneDrive-NorwichBioScienceInstitutes/laetitia-book-chapter-figure/alphafold
 # yeast-erg24-D286N
