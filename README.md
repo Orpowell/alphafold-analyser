@@ -1,6 +1,6 @@
 # AlphaFold Analyser
 
-AlphaFold Analyser is a tool to produce high quality visualisations of protein structures predicted by AlphaFold. These visualisations allow the user to view the pLDDT of each residue of a protein structure and the predicted alignment error for the entire protein to rapidly infer the quality of a predicted structure.
+AlphaFold Analyser is a command line tool to produce high quality visualisations of protein structures predicted by AlphaFold. These visualisations allow the user to view the pLDDT of each residue of a protein structure and the predicted alignment error for the entire protein to rapidly infer the quality of a predicted structure.
 
 Dependencies for AlphaFold Analyser can be found in [requirements.txt](https://github.com/Orpowell/alphafold-analyser/blob/master/requirements.txt). In addition the following software is also required:
 - Python >=3.7
@@ -27,3 +27,19 @@ alphafold-analyser.py should now run from the shell or Terminal using the comman
 Alternatively, alphafold-analyser.py can be run directly from an IDE.
 
 ## Using AlphaFold Analyser
+GIF
+
+When running alphafold analyser, 
+
+All commands require an output directory to be specified (-o or —output_directory) and can be run simultaneously.  
+
+#### Creating a pLDDT annotated structure
+A pLDDT annotated structure can be generated using the following command:
+
+	alphafold-analyser.py --pdb protein.pdb -o my_directory
+
+#### Generating a predicted alignment error plot
+A pae plot can be generated using the following command:
+
+	alphafold-analyser.py --pkl protein.pkl -o my_directory
+
