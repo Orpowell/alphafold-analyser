@@ -50,39 +50,46 @@ def protein_painter(pdb_input, output):
 
 
 def cmd_lineparser():
-    parser = argparse.ArgumentParser(description='Generate a predicted alignment error plot and pLDDT coloured structure from your AlphaFold results!')
+    parser = argparse.ArgumentParser(prog='AlphaFold Analyser',
+                                     description='Generate a predicted alignment error plot and pLDDT coloured structure from your AlphaFold results!',
+                                     exit_on_error=True, usage=None)
 
+    group_inputs = parser.add_argument_group('Inputs')
     # Get pdb structure path
-    parser.add_argument('-p', '--pdb', metavar='arg', type=str, action='store', help='path to pdb file',
-                        default=None)
-
+    group_inputs.add_argument('-p', '--pdb', metavar='arg', type=str, action='store', help='path to pdb file',
+                              default=None)
     # Get pkl file path
-    parser.add_argument('-l', '--pkl', metavar='arg', type=str, action='store', help='path to pkl file',
-                        default=None)
+    group_inputs.add_argument('-l', '--pkl', metavar='arg', type=str, action='store', help='path to pkl file',
+                              default=None)
 
+    group_output = parser.add_argument_group('Outputs')
     # Get output directory
-    parser.add_argument('-o', '--output', metavar='arg', type=str, action='store',
-                        help='directory to store outputs', default=None)
+    group_output.add_argument('-o', '--output', metavar='arg', type=str, action='store',
+                              help='directory to store outputs', default=None)
 
     # Parse arguments
     args = parser.parse_args()
+    input_list = [args.pkl, args.pdb, args.output]
 
-    if args is None:
-        parser.error('help')
-    if args.pkl is None and args.pdb is None:
-        parser.error('please provide input(s)')
+    # If all arguments are None display --help information
+    if input_list.count(input_list[0]) == len(input_list):
+        parser.print_help()
 
+    # Check arg.pdb input is a pdb file
     if args.pdb is not None:
         if not args.pdb.endswith('.pdb'):
             parser.error('ERROR: --pdb requires pdb structure')
 
+    # Check arg.pkl input is a pkl file
     if args.pkl is not None:
         if not args.pkl.endswith('.pkl'):
             parser.error('ERROR: --pkl requires pkl file')
 
+    # Check output directory is given
     if args.output is None:
         parser.error('ERROR: Please provide output directory')
 
+    # Check output directory exists
     if not os.path.isdir(args.output):
         parser.error('ERROR: Output directory not found')
 
@@ -93,16 +100,22 @@ def main():
     args = cmd_lineparser()
 
     if args.pdb is not None:
-        print(' Visualising pLDDT data...')
+        print('\n Visualising pLDDT data...\n')
         protein_painter(args.pdb, args.output)
-        print(' pLDDT data visualised')
+        print('\n pLDDT data visualised\n')
+
+    elif args.pdb is None:
+        print(' Skipping pLDDT data visualisation...\n')
 
     if args.pkl is not None:
-        print(' plotting predicted alignment error...')
+        print(' plotting predicted alignment error...\n')
         pae_plotter(args.pkl, args.output)
-        print(' predicted alignment error plotted')
+        print(' predicted alignment error plotted\n')
 
+    elif args.pkl is None:
+        print(' skipping predicted alignment error visualisation...\n')
 
+    print(' all tasks complete, shutting down\n')
 
 
 # Run analysis
