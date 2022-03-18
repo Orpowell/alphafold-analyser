@@ -10,7 +10,6 @@ import matplotlib.pyplot as plt
 # Function to produce a PAE plot from the pkl file produced by AlphaFold - N.B code taken from AlphaFold CoLab
 def pae_plotter(pickle_input, output):
     # Load as a dictionary from pickle file
-
     data = open(pickle_input, 'rb')
     prediction_result = pickle.load(data)
     data.close()
@@ -21,7 +20,7 @@ def pae_plotter(pickle_input, output):
         prediction_result['max_predicted_aligned_error']
     )}
 
-    # Output file for the plot
+    # Output file_path for the plot
     pae_output = f'{output}/pae.png'
 
     # Plot predicted align error results for each aligned residue
@@ -50,22 +49,26 @@ def protein_painter(pdb_input, output):
 
 
 def cmd_lineparser():
-    parser = argparse.ArgumentParser(prog='AlphaFold Analyser',
-                                     description='Generate a predicted alignment error plot and pLDDT coloured structure from your AlphaFold results!',
-                                     exit_on_error=True, usage=None)
+    parser = argparse.ArgumentParser(prog='AlphaFold Analyser', exit_on_error=True, add_help=False, formatter_class=argparse.RawTextHelpFormatter)
 
     group_inputs = parser.add_argument_group('Inputs')
     # Get pdb structure path
-    group_inputs.add_argument('-p', '--pdb', metavar='arg', type=str, action='store', help='path to pdb file',
+    group_inputs.add_argument('-p', '--pdb', metavar='\b', type=str, action='store', help='path to pdb file - generates pLDDT coloured structure',
                               default=None)
     # Get pkl file path
-    group_inputs.add_argument('-l', '--pkl', metavar='arg', type=str, action='store', help='path to pkl file',
+    group_inputs.add_argument('-l', '--pkl', metavar='\b', type=str, action='store', help='path to pkl file - generates predicted alignment error plot',
                               default=None)
 
     group_output = parser.add_argument_group('Outputs')
     # Get output directory
-    group_output.add_argument('-o', '--output', metavar='arg', type=str, action='store',
-                              help='directory to store outputs', default=None)
+    group_output.add_argument('-o', '--output', metavar='\b', type=str, action='store',
+                              help='directory to store all generated outputs', default=None)
+
+    group_options = parser.add_argument_group('Options')
+    # Get Version
+    group_options.add_argument('-v', '--version', action='version', version='%(prog)s v2.0')
+    # Get help
+    group_options.add_argument("-h", "--help", action="help", help="show this help message and exit\n ")
 
     # Parse arguments
     args = parser.parse_args()
@@ -73,7 +76,7 @@ def cmd_lineparser():
 
     # If all arguments are None display --help information
     if input_list.count(input_list[0]) == len(input_list):
-        parser.print_help()
+        parser.parse_args(['-h'])
 
     # Check arg.pdb input is a pdb file
     if args.pdb is not None:
@@ -99,23 +102,27 @@ def cmd_lineparser():
 def main():
     args = cmd_lineparser()
 
+    # if pdb structure provided and generates PyMol session with pLDDT coloured
     if args.pdb is not None:
         print('\n Visualising pLDDT data...\n')
         protein_painter(args.pdb, args.output)
         print('\n pLDDT data visualised\n')
 
+    # if no pdb structure provided skips process
     elif args.pdb is None:
         print(' Skipping pLDDT data visualisation...\n')
 
+    # if pkl structure provided, generate predicted aligned error plot
     if args.pkl is not None:
         print(' plotting predicted alignment error...\n')
         pae_plotter(args.pkl, args.output)
         print(' predicted alignment error plotted\n')
 
+    # if no pkl file provided skips process
     elif args.pkl is None:
         print(' skipping predicted alignment error visualisation...\n')
 
-    print(' all tasks complete, shutting down\n')
+    print(' all tasks complete, shutting down...\n')
 
 
 # Run analysis
