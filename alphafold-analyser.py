@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 # Import all relevant libraries
+import argparse
 import pickle
 import sys
 import matplotlib.pyplot as plt
@@ -49,10 +50,10 @@ def pae_plotter():
 # Function to create a PyMOL session from the ranked_0.pdb file produced by AlphaFold
 def protein_painter():
     # Set file paths to access pdb structure and save output pymol session
-    check_structure_path = f'{input_directory}/ranked_0.pdb'    # File path to access the pdb structure
-    session_path = f'{result_dir}/{protein}.pse'    # File path for the PyMol session
-    path = os.path.isfile(check_structure_path)   # Check the Output Directory exists
-    structure_path = f'"{input_directory}/ranked_0.pdb"'        # File formatted for PyMol
+    check_structure_path = f'{input_directory}/ranked_0.pdb'  # File path to access the pdb structure
+    session_path = f'{result_dir}/{protein}.pse'  # File path for the PyMol session
+    path = os.path.isfile(check_structure_path)  # Check the Output Directory exists
+    structure_path = f'"{input_directory}/ranked_0.pdb"'  # File formatted for PyMol
     # Checks file exists and creates a pymol session
     if path is True:
         # Terminal Command to open pdb file, color protein by pLDDT (b-factor) and save the session in the output directory
@@ -69,9 +70,9 @@ def protein_painter():
 
 # Function to collect the directory storing the results from AlphaFold
 def get_input():
-    input_path = input('Input Directory: ')     # Receive directory storing AlphaFold results
+    input_path = input('Input Directory: ')  # Receive directory storing AlphaFold results
 
-    path = os.path.isdir(input_path)    # Check directory exists
+    path = os.path.isdir(input_path)  # Check directory exists
 
     # If directory exists return directory
     if path is True:
@@ -89,7 +90,7 @@ def get_input():
 def get_output():
     output_path = input('Output Directory: ')  # Input File path for directory containing results
     protein_label = input('Protein: ')  # Input the name of the protein - used to label directories and files
-    path = os.path.isdir(output_path)   # Check directory exists
+    path = os.path.isdir(output_path)  # Check directory exists
 
     # If the directory exists generate output directory and return all relevant variables
     if path is True:
@@ -114,10 +115,49 @@ def get_output():
         return path
 
 
+# Argparse set-up
+
+analyser = argparse.ArgumentParser(description='Copy file from input to output')
+
+# Get pdb structure path
+analyser.add_argument('pdb',
+                      metavar='pdb_structure',
+                      type=str,
+                      action='store',
+                      help='Path to pdb file'
+                      )
+
+# Get pkl file path
+analyser.add_argument('pkl',
+                      metavar='pickle_file',
+                      type=str,
+                      action='store',
+                      help='Path to pkl file'
+                      )
+
+# Get output directory
+analyser.add_argument('output',
+                      metavar='output_directory',
+                      type=str,
+                      action='store',
+                      help='Directory to store outputs'
+                      )
+
+args = analyser.parse_args()
+
+pdb_path = args.pdb
+pkl_path = args.pkl
+output_directory = args.output
+
 # Run analysis
 if __name__ == '__main__':
-    print('test-2')
+    print(pdb_path)
+    print(pkl_path)
+    print(output_directory)
+
+    '''
     input_directory = get_input()  # Input File path for directory containing AlphaFold results
     output_directory, result_dir, protein = get_output()  # Input File path for directory containing results
-    pae_plotter()   # Generate a PAE plot
-    protein_painter()   # Create a PyMol Session
+    pae_plotter()  # Generate a PAE plot
+    protein_painter()  # Create a PyMol Session
+    '''
