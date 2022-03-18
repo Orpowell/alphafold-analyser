@@ -116,6 +116,7 @@ def get_output():
 
 # Run analysis
 if __name__ == '__main__':
+    print('test-2')
     input_directory = get_input()  # Input File path for directory containing AlphaFold results
     output_directory, result_dir, protein = get_output()  # Input File path for directory containing results
     pae_plotter()   # Generate a PAE plot
