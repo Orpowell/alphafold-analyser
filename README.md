@@ -28,7 +28,7 @@ Alternatively, alphafold-analyser.py can be run directly from an IDE.
 
 ## Using AlphaFold Analyser
 
-![tutorial]()
+![tutorial](https://github.com/Orpowell/alphafold-analyser/blob/main/img/tutorial.gif)
 
 When running alphafold analyser,  please ensure the same pdb structure and pickle file used are for the same prediction. All commands require an output directory to be specified (-o or —output_directory) and can be run simultaneously.  
 
@@ -44,7 +44,7 @@ A pae plot can be generated using the following command:
 
 ## Outputs
 
-![outputs]()
+![outputs](https://github.com/Orpowell/alphafold-analyser/blob/main/img/outputs.png)
 
 AlphaFold Analyser has produces two outputs:
 
