@@ -3,7 +3,7 @@
 <h2 id="dependencies">Dependencies</h2>
 <ul>
 <li>Python 3.7</li>
-<li>AlphaFold 2.0.0</li>
+<li>AlphaFold <=1.0.0</li>
 <li>PyMol 2.5.2</li>
 <li>Matplotlib 3.4.2</li>
 </ul>
