@@ -27,7 +27,8 @@ alphafold-analyser.py should now run from the shell or Terminal using the comman
 Alternatively, alphafold-analyser.py can be run directly from an IDE.
 
 ## Using AlphaFold Analyser
-GIF
+
+![tutorial]()
 
 When running alphafold analyser,  please ensure the same pdb structure and pickle file used are for the same prediction. All commands require an output directory to be specified (-o or —output_directory) and can be run simultaneously.  
 
@@ -43,15 +44,15 @@ A pae plot can be generated using the following command:
 
 ## Outputs
 
-Pretty picture of outputs
+![outputs]()
 
 AlphaFold Analyser has produces two outputs:
 
-- A PyMol session (pLDDT.pse): This will contain the structure predicted by AlphaFold with each individual residues coloured according to their pLDDT.  Residues are coloured on a spectrum from yellow to green to blue (low to high confidence).
+1. A PyMol session (pLDDT.pse): This will contain the structure predicted by AlphaFold with each individual residues coloured according to their pLDDT.  Residues are coloured on a spectrum from yellow to green to blue (low to high confidence).
 
-- A predicted aligned error plot (pae.png).  The confidence values for each residue are coloured using the same colour scheme as the PyMol session.
+2. A predicted aligned error plot (pae.png).  The confidence values for each residue are coloured using the same colour scheme as the PyMol session.
 
- ## Feedback
+## Feedback
 
 Any and all feedback is welcome, just raise an issue and I'll get back to you!
 
