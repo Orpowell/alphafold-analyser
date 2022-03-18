@@ -124,7 +124,7 @@ def main():
 
     # if pkl structure provided, generate predicted aligned error plot
     if args.pkl is not None:
-        print(' plotting predicted aligned error...\n')
+        print(' plotting predicted aligned error...')
         pae_plotter(args.pkl, args.output)
 
     # if no pkl file provided skips process
