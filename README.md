@@ -1,44 +1,62 @@
-<h1 id="alphafold-analyser">AlphaFold Analyser</h1>
-<p>This program produces high quality visualisations of predicted structures produced by AlphaFold. These visualisations allow the user to view the pLDDT of each residue of a protein structure and the predicted alignment error for the entire protein to rapidly infer the quality of a predicted structure.</p>
-<h2 id="dependencies">Dependencies</h2>
-<ul>
-<li>Python 3.7</li>
-<li>AlphaFold <=1.0.0</li>
-<li>PyMol 2.5.2</li>
-<li>Matplotlib 3.4.2</li>
-</ul>
-<h2 id="installing-alphafold-analyser-on-linux-macosx">Installing AlphaFold Analyser on Linux &amp; MacOSX</h2>
-<p>At the command line, change directory to the directory where alphafold-analyser.py was downloaded, <download-directory>, using the full path name.</p>
-<pre><code>cd &lt;download-directory&gt;</code></pre>
-<p>Now move the file to where you normally keep your binaries. This directory should be in your path. Note: you may require administrative privileges to do this (either switching user to root or by using sudo).</p>
-<p>As root:</p>
-<pre><code>mv alphafold-analyser.py /usr/local/bin/</code></pre>
-<p>As regular user:</p>
-<pre><code>sudo mv alphafold-analyser.py /usr/local/bin/</code></pre>
-<p>alphafold-analyser.py should now run from the shell or Terminal using the command alphafold-analyser.py</p>
-<p>Alternatively, alphafold-analyser.py can be run directly from an IDE.</p>
-<h2 id="alphafold-settings-for-the-analyser">AlphaFold Settings for the Analyser</h2>
-<p>For the programme to function correctly, the model names parameter should label the first two models in alphafold as model_1 and model_2_ptm. An example of how this parameter should be written when running AlphaFold is shown below.</p>
-<pre><code>--model_names=model_1,model_2_ptm,model_3,model_4,model_5 \</code></pre>
-<p>model_2_ptm is used to collect the data required to plot the Predicted Alignment Error.</p>
-<p>All files output by alphafold are stored in a single directory. However, only the ranked_0.pdb and results_model_2_ptm.pkl file are needed for analysis.</p>
-<h2 id="running-alphafold-analyser">Running AlphaFold Analyser</h2>
-<p>A directory should be created containing all necessary files (see above). AlphaFold Analyser will then ask for the following inputs:</p>
+# AlphaFold Analyser
 
-Input Directory: The file path for the directory containing the alphafold results files
+AlphaFold Analyser is a command line tool to produce high quality visualisations of protein structures predicted by AlphaFold. These visualisations allow the user to view the pLDDT of each residue of a protein structure and the predicted alignment error for the entire protein to rapidly infer the quality of a predicted structure. Alphafold analyser can process the results of both multimer and monomer predictions.
 
-Output Directory: The file path for the directory where the Analyser results will be
-                    stored.
-                    
-Protein: The name of protein being analysed. This will be used to label all files
-           and the directory created during the analysis
+Dependencies for AlphaFold Analyser can be found in [requirements.txt](https://github.com/Orpowell/alphafold-analyser/blob/master/requirements.txt). In addition the following software is also required:
+- Python >=3.7
+- PyMol == 2.5.2
+
+## Installing AlphaFold Analyser on Linux & MacOSX
+
+At the command line, change directory to the directory where alphafold-analyser.py was downloaded, , using the full path name.
+
+	cd <download-directory>
+
+Now move the file to where you normally keep your binaries. This directory should be in your path. Note: you may require administrative privileges to do this (either switching user to root or by using sudo).
+
+As root:
+
+	mv alphafold-analyser.py /usr/local/bin/
+
+As regular user:
+
+	sudo mv alphafold-analyser.py /usr/local/bin/
+
+alphafold-analyser.py should now run from the shell or Terminal using the command alphafold-analyser.py
+
+Alternatively, alphafold-analyser.py can be run directly from an IDE.
+
+## Using AlphaFold Analyser
+
+![tutorial]()
+
+When running alphafold analyser,  please ensure the same pdb structure and pickle file used are for the same prediction. All commands require an output directory to be specified (-o or —output_directory) and can be run simultaneously.  
+
+#### Creating a pLDDT annotated structure
+A pLDDT annotated structure can be generated using the following command:
+
+	alphafold-analyser.py --pdb protein.pdb --output my_directory
+
+#### Generating a predicted alignment error plot
+A pae plot can be generated using the following command:
+
+	alphafold-analyser.py --pkl protein.pkl --output my_directory
+
+## Outputs
+
+![outputs]()
+
+AlphaFold Analyser has produces two outputs:
+
+1. A PyMol session (pLDDT.pse): This will contain the structure predicted by AlphaFold with each individual residues coloured according to their pLDDT.  Residues are coloured on a spectrum from yellow to green to blue (low to high confidence).
+
+2. A predicted aligned error plot (pae.png).  The confidence values for each residue are coloured using the same colour scheme as the PyMol session.
+
+## Feedback
+
+Any and all feedback is welcome, just raise an issue and I'll get back to you!
 
 
-<h2 id="outputs">Outputs</h2>
-<p>AlphaFold Analyser has produces two outputs:</p>
 
-<li>A PyMol session labelled with the protein input (e.g protein.pse). This will  contain the highest confidence structure predicted by AlphaFold. The individual residues of the structure are coloured according to their pLDDT on colour spectrum from yellow to green to blue (low to high confidence).</li>
 
-<li>A predicted alignment error plot again labelled with the protein input (e.g protein-pae.png). The plot is colored by the confidence values for each residue using the same colour scheme as the PyMol session.</li>
-<h2 id="comments">Comments</h2>
-<p>Future work may involve allowing for multiple inputs at once.</p>
+
