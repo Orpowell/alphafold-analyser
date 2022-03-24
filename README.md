@@ -31,6 +31,8 @@ Alternatively, alphafold-analyser.py can be run directly from an IDE.
 
 ![tutorial](https://github.com/Orpowell/alphafold-analyser/blob/main/img/tutorial.gif)
 
+Please note: to plot the predicted aligned error of a monomer; AlphaFold must be run using the setting —model_preset=monomer_ptm (ptm models are automatically generated for multimer predictions).
+
 When running alphafold analyser,  please ensure the same pdb structure and corresponding pickle file used are for the same prediction. All commands require an output directory to be specified (-o or —output_directory) and can be run simultaneously.  
 
 #### Creating a pLDDT annotated structure
