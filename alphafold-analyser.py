@@ -8,46 +8,6 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 
-
-# Create a PAE plot from the pkl file produced by AlphaFold - N.B code taken from AlphaFold CoLab
-def pae_plotter(pickle_input, output):
-
-    try:
-        # Load as a dictionary from pickle file
-        data = open(pickle_input, 'rb')
-        prediction_result = pickle.load(data)
-        data.close()
-
-        # Generate dictionary for predicted aligned error results from pkl file
-        pae_outputs = {'protein': (
-            prediction_result['predicted_aligned_error'],
-            prediction_result['max_predicted_aligned_error']
-        )}
-
-        # Output file_path for the plot
-        pae_output = f'{output}/pae.png'
-
-        # Plot predicted align error results for each aligned residue
-        pae, max_pae = list(pae_outputs.values())[0]
-        fig = plt.figure()  # generate figure
-        fig.set_facecolor('white')  # color background white
-        plt.imshow(pae, vmin=0., vmax=max_pae)  # plot pae
-        plt.colorbar(fraction=0.46, pad=0.04)  # create color bar
-        plt.title('Predicted Aligned Error')  # plot title
-        plt.xlabel('Scored residue')  # plot x-axis label
-        plt.ylabel('Aligned residue')  # plot y-axis label
-
-        plt.savefig(pae_output, dpi=1000, bbox_inches='tight')  # save plot to output directory
-
-        print('\n predicted aligned error plotted\n')
-
-    except EOFError:
-        print(' Error: Data could not be found, predicted aligned error plotting failed\n')
-
-    except FileNotFoundError:
-        print(' Error: File could not be found, predicted aligned error plotting failed\n')
-
-
 # unpickle file and return dictionary
 
 def depickler(pickle_input):
