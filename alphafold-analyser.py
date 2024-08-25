@@ -45,12 +45,22 @@ def plot_pLDDT(data, output):
     ax.set_ylim(0,100)
     ax.set_xlim(1, max(position)+10)
     ax.spines[['right', 'top']].set_visible(False)
+    ax.set_yticks([0,10,20,30,40,50,60,70,80,90,100])
+
+    plddt_legend = {
+                    "Very high (pLDDT > 90)" :"#024fcc",
+                    "High (90 > pLDDT > 70)" : "#60c2e8",
+                    "Low (70 > pLDDT > 50)" : "#f37842",
+                    "Very low (pLDDT < 50)" : "#f9d613",
+                    }
+
+    ax.legend(plddt_legend, title="pLDDT Confidence",bbox_to_anchor=(1, 0.5))
 
     # labels
     ax.set_xlabel("Amino Acid Position")
     ax.set_ylabel("pLDDT")
 
-    plt.savefig(f'{output}/pae.png', dpi=1000, bbox_inches='tight')
+    plt.savefig(f'{output}/plddt.png', dpi=1000, bbox_inches='tight')
 
 # Plot Predicted Aligned Error
 def plot_PAE(data, output):
@@ -70,7 +80,7 @@ def plot_PAE(data, output):
     cbar = fig.colorbar(cmap, cax=axins, orientation="horizontal")  # create color bar
     cbar.set_label('Expected position error (Ångströms)')
 
-    plt.savefig(f'{output}/plddt.png', dpi=1000, bbox_inches='tight')
+    plt.savefig(f'{output}/PAE.png', dpi=1000, bbox_inches='tight')
 
 def make_plots(pickle, output):
 
