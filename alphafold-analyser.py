@@ -60,7 +60,7 @@ def plot_pLDDT(data, output):
         "Very low (pLDDT < 50)": "#f9d613",
     }
 
-    ax.legend(plddt_legend, title="pLDDT Confidence", bbox_to_anchor=(1, 0.5))
+    ax.legend(plddt_legend, title="pLDDT Confidence", prop={'size': 16}, bbox_to_anchor=(-0.15, 1))
 
     # labels
     ax.set_xlabel("Amino Acid Position")
@@ -102,13 +102,12 @@ def protein_painter(pdb_input, output, pymol_binary):
     # File path for the PyMol session
     session_path = f"{output}/pLDDT.pse"
 
-    custom_colors = "set_color n0, [0.051, 0.341, 0.827]; set_color n1, [0.416, 0.796, 0.945]; set_color n2, [0.996, 0.851, 0.212]; set_color n3, [0.992, 0.490, 0.302]"
     color_plddt = (
-        " color n0, b < 100; color n1, b < 90; color n2, b < 70;  color n3, b < 50"
+        " color 0x024fcc, b < 100; color 0x60c2e8, b < 90; color 0xf37842, b < 70;  color 0xf9d613, b < 50"
     )
 
     # Terminal Command to open pdb file, color protein by pLDDT (b-factor) and save the session in the output directory
-    pymol_command = f'{pymol_binary} -cq {str(pdb_input)} -d "{custom_colors}; {color_plddt}; save {session_path}"'
+    pymol_command = f'{pymol_binary} -cq {str(pdb_input)} -d "{color_plddt}; save {session_path}"'
 
     # Run terminal command
     os.system(pymol_command)
