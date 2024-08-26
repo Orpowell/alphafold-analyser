@@ -1,6 +1,6 @@
 # AlphaFold Analyser
 
-AlphaFold Analyser is a command line tool to produce high quality visualisations of protein structures predicted by AlphaFold. These visualisations allow the user to view the pLDDT of each residue of a protein structure and the predicted alignment error for the entire protein to rapidly infer the quality of a predicted structure. Alphafold analyser can process the results of both multimer and monomer predictions.
+AlphaFold Analyser is a command line tool to produce high quality visualisations of protein structures predicted by AlphaFold2. These visualisations allow the user to view the pLDDT of each residue of a protein structure and the predicted alignment error for the entire protein to rapidly infer the quality of a predicted structure. Alphafold analyser can process the results of both multimer and monomer predictions.
 
 Dependencies for AlphaFold Analyser can be found in [requirements.txt](https://github.com/Orpowell/alphafold-analyser/blob/master/requirements.txt). In addition the following software is also required:
 

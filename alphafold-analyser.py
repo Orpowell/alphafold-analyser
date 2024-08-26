@@ -43,8 +43,8 @@ def plot_pLDDT(data, output):
         position,
         plddt,
         color="black",
-        linewidth=1,
-        linestyle="-",
+        linewidth=2,
+        linestyle="-"
     )
 
     # Plot parameters
