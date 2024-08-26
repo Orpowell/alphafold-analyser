@@ -64,6 +64,24 @@ AlphaFold Analyser creates the following outputs:
 
 3. A predicted aligned error plot (pae.png).  The confidence values for each residue are coloured using the same colour scheme as the PyMol session. 
 
+## Citing AlphaFold Analyser
+
+If you use this code or tool please cite:
+
+	@article {Hafeez2023,
+		author = {Hafeez, Amber N. and Chartrain, Laetitia and Feng, Cong and Cambon, Florence and Clarke, Martha and Griffiths, Simon and Hayta, Sadiye and Jiang, Mei and Keller, Beat and Kirby, Rachel and Kolodziej, Markus C. and Powell, Oliver R. and Smedley, Mark and Steuernagel, Burkhard and Xian, Wenfei and Wingen, Luzie U. and Cheng, Shifeng and Saintenac, Cyrille and Wulff, Brande B. H. and Brown, James K. M.},
+		title = {Septoria tritici blotch resistance gene Stb15 encodes a lectin receptor-like kinase},
+		elocation-id = {2023.09.11.557217},
+		year = {2023},
+		doi = {10.1101/2023.09.11.557217},
+		publisher = {Cold Spring Harbor Laboratory},
+		URL = {https://www.biorxiv.org/content/early/2023/09/12/2023.09.11.557217},
+		eprint = {https://www.biorxiv.org/content/early/2023/09/12/2023.09.11.557217.full.pdf},
+		journal = {bioRxiv}
+	}
+
+In addition please also cite the AlphaFold papers as necessary.
+
 ## Feedback
 
 Any and all feedback is welcome, just raise an issue and I'll get back to you!
