@@ -29,18 +29,18 @@ Alternatively, alphafold-analyser.py can be run directly from an IDE.
 
 ## Using AlphaFold Analyser
 
-![tutorial](https://github.com/Orpowell/alphafold-analyser/blob/main/img/tutorial.gif)
-
 Please note: to plot the predicted aligned error of a monomer; AlphaFold must be run using the setting —model_preset=monomer_ptm (ptm models are automatically generated for multimer predictions).
 
-When running alphafold analyser,  please ensure the same pdb structure and corresponding pickle file used are for the same prediction. All commands require an output directory to be specified (-o or —output_directory) and can be run simultaneously.  
+When running alphafold analyser,  please ensure the structure and pickle file used are for the same prediction. All commands require an output directory to be specified (-o or —output_directory) and can be run simultaneously.  
+
+	alphafold-analyser.py --pkl protein.pkl --pdb protein.pdb --binary path/to/pymol/binary --output my_directory
 
 #### Creating a pLDDT annotated structure
 A pLDDT annotated structure can be generated using the following command:
 
-	alphafold-analyser.py --pdb protein.pdb --output my_directory
+	alphafold-analyser.py --pdb protein.pdb --binary path/to/pymol/binary --output my_directory
 
-#### Generating a predicted alignment error plot
+#### Generating a predicted alignment error and pLDDT  plot
 A pae plot can be generated using the following command:
 
 	alphafold-analyser.py --pkl protein.pkl --output my_directory
@@ -49,11 +49,20 @@ A pae plot can be generated using the following command:
 
 ![outputs](https://github.com/Orpowell/alphafold-analyser/blob/main/img/outputs.png)
 
-AlphaFold Analyser has produces two outputs:
+AlphaFold Analyser creates the following outputs:
 
-1. A PyMol session (pLDDT.pse): This will contain the structure predicted by AlphaFold with each individual residues coloured according to their pLDDT.  Residues are coloured on a spectrum from yellow to green to blue (low to high confidence).
+1. A plot of pLDDT across the structure (plddt.png).
 
-2. A predicted aligned error plot (pae.png).  The confidence values for each residue are coloured using the same colour scheme as the PyMol session.
+2. A PyMol session (pLDDT.pse): This will contain the structure predicted by AlphaFold with each individual residues coloured according to their pLDDT as follows:
+
+	| Colour | pLDDT confidence |	
+	|---|---|
+	| Blue  | Very high (pLDDT > 90) |
+	| Cyan 	| High (90 > pLDDT > 70) |
+	| Orange | Low (70 > pLDDT > 50) |
+	| Yellow | Very low (pLDDT < 50) |
+
+3. A predicted aligned error plot (pae.png).  The confidence values for each residue are coloured using the same colour scheme as the PyMol session. 
 
 ## Feedback
 
