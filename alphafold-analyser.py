@@ -18,12 +18,12 @@ def depickler(pickle_input):
 
     except EOFError:
         print(
-            " Error: Data could not be found, predicted aligned error plotting failed\n"
+            "\nERROR: Data could not be found, predicted aligned error plotting failed."
         )
 
     except FileNotFoundError:
         print(
-            " Error: File could not be found, predicted aligned error plotting failed\n"
+            "\nERROR: File could not be found, predicted aligned error plotting failed."
         )
 
 
@@ -114,10 +114,10 @@ def protein_painter(pdb_input, output, pymol_binary):
     os.system(pymol_command)
 
     if os.path.isfile(session_path):
-        print("\n pLDDT data visualised\n")
+        print("\npLDDT data visualised.")
 
     else:
-        print("\n Error: visualisation failed\n")
+        print("\nERROR: visualisation failed.")
 
 # Checks if a file exists
 def is_valid_file(parser, arg):
@@ -202,16 +202,16 @@ def cmd_lineparser():
     if not os.path.exists(args.output):
         try:
             os.makedirs(args.output)
-            print(f"Created output directory: {args.output}")
+            print(f"\nCreated output directory: {args.output}")
         except Exception as e:
-            print(f"Error creating output directory {args.output}: {str(e)}")
+            print(f"\nERROR: failed to create output directory {args.output}: {str(e)}")
             sys.exit(1)
     else:
-        print(f"Output directory: {args.output}")
+        print(f"\nOutput directory: {args.output}")
     
     #Check binary provided if pymol file is provided
     if args.pdb is not None and args.binary is None:
-        parser.error("ERROR: pymol binary required to analyse protein structure")
+        parser.error("\nERROR: pymol binary required to analyse protein structure.")
 
     return args
 
@@ -222,25 +222,25 @@ def main():
 
     # if pdb structure provided and generates PyMol session with pLDDT coloured
     if args.pdb is not None:
-        print("\n Visualising pLDDT data...\n")
+        print("\nVisualising pLDDT data...")
         protein_painter(args.pdb, args.output, args.binary)
 
     # if no pdb structure provided skips process
     elif args.pdb is None:
-        print("\n no pdb file provided, skipping pLDDT data visualisation...\n")
+        print("\nNo pdb file provided, skipping pLDDT data visualisation...")
 
     # if pkl structure provided, generate predicted aligned error plot
     if args.pkl is not None:
-        print(" plotting predicted aligned error and plddt...")
+        print("\nPlotting predicted aligned error and plddt...")
         make_plots(args.pkl, args.output)
 
     # if no pkl file provided skips process
     elif args.pkl is None:
         print(
-            " no pickle file provided, skipping predicted aligned error visualisation...\n"
+            "\nNo pickle file provided, skipping predicted aligned error visualisation..."
         )
 
-    print(" all processes finished, shutting down...\n")
+    print("\nAll processes finished, shutting down.")
 
 
 # Run analysis
