@@ -4,6 +4,7 @@
 import argparse
 import os
 import pickle
+import sys
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 from mpl_toolkits.axes_grid1.inset_locator import inset_axes
@@ -176,7 +177,7 @@ def cmd_lineparser():
         type=str,
         action="store",
         help="directory to store all generated outputs",
-        default=None,
+        default="analyser_output",
     )
 
     group_options = parser.add_argument_group("Options")
@@ -198,8 +199,15 @@ def cmd_lineparser():
         parser.parse_args(["-h"])
 
     # Check output directory exists
-    if not os.path.isdir(args.output):
-        parser.error("ERROR: Output directory not found")
+    if not os.path.exists(args.output):
+        try:
+            os.makedirs(args.output)
+            print(f"Created output directory: {args.output}")
+        except Exception as e:
+            print(f"Error creating output directory {args.output}: {str(e)}")
+            sys.exit(1)
+    else:
+        print(f"Output directory: {args.output}")
     
     #Check binary provided if pymol file is provided
     if args.pdb is not None and args.binary is None:
