@@ -32,13 +32,14 @@ def plot_pLDDT(data, output):
     fig, ax = plt.subplots(figsize=(20, 5))
 
     plddt = data["plddt"]
+    max_length = len(plddt) + (len(plddt) * 0.1)
     position = [n + 1 for n, ele in enumerate(data["plddt"])]
 
     # Confidence boundaries
-    ax.add_patch(Rectangle((0, 90), 800, 10, color="#024fcc"))
-    ax.add_patch(Rectangle((0, 70), 800, 20, color="#60c2e8"))
-    ax.add_patch(Rectangle((0, 50), 800, 20, color="#f37842"))
-    ax.add_patch(Rectangle((0, 0), 800, 50, color="#f9d613"))
+    ax.add_patch(Rectangle((0, 90), max_length, 10, color="#024fcc"))
+    ax.add_patch(Rectangle((0, 70), max_length, 20, color="#60c2e8"))
+    ax.add_patch(Rectangle((0, 50), max_length, 20, color="#f37842"))
+    ax.add_patch(Rectangle((0, 0), max_length, 50, color="#f9d613"))
     # Plot
     ax.plot(
         position,
@@ -61,7 +62,7 @@ def plot_pLDDT(data, output):
         "Very low (pLDDT < 50)": "#f9d613",
     }
 
-    ax.legend(plddt_legend, title="pLDDT Confidence", prop={'size': 16}, bbox_to_anchor=(-0.15, 1))
+    ax.legend(plddt_legend, title="pLDDT Confidence", prop={'size': 16}, bbox_to_anchor=(-0.05, 1))
 
     # labels
     ax.set_xlabel("Amino Acid Position")
