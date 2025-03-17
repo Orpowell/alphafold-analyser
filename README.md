@@ -36,9 +36,9 @@ pip install --upgrade --no-cache-dir jax==0.3.25 jaxlib==0.3.25+cuda11.cudnn805 
 
 ## Usage
 
-**NOTE**: to plot the predicted aligned error of a monomer; AlphaFold must be run using the setting —model_preset=monomer_ptm (ptm models are automatically generated for multimer predictions).
+**NOTE**: to plot the predicted aligned error of a monomer, AlphaFold must be run using the setting `--model_preset=monomer_ptm` (ptm models are automatically generated for multimer predictions).
 
-When running alphafold analyser, please ensure the structure and pickle file used are for the same prediction. All commands require an output directory to be specified (-o or —output_directory) and can be run simultaneously.  
+When running AlphaFold Analyser, please ensure the structure and pickle file used are for the same prediction.  
 
 ```bash
 alphafold-analyser.py \
@@ -54,9 +54,9 @@ The script accepts the following command line arguments:
 
 | Argument | Short | Description |
 |----------|-------|-------------|
-| `--pdb` | `-p` | Path to PDB file - generates pLDDT colored structure visualization |
+| `--pdb` | `-p` | Path to PDB file - generates pLDDT colored structure visualisation |
 | `--pkl` | `-l` | Path to pickle file - generates predicted aligned error plot |
-| `--binary` | `-b` | Path to PyMOL binary - required when analyzing PDB files |
+| `--binary` | `-b` | Path to PyMOL binary - required when analysing PDB files |
 | `--output` | `-o` | Directory to store all generated outputs (default: "analyser_output") |
 | `--version` | `-v` | Show program version and exit |
 | `--help` | `-h` | Show help message and exit |
@@ -126,7 +126,7 @@ AlphaFold Analyser creates the following outputs:
 
 ### Multimer Statistics
 
-When analyzing multimer predictions, the tool also outputs the following statistics:
+When analysing multimer predictions, the tool also outputs the following statistics:
 
 - **pTM**: A confidence metric for the predicted TM-score of the model
 - **ipTM**: Interface predicted TM-score, measures the confidence of the interface between chains
