@@ -202,7 +202,7 @@ def cmd_lineparser():
     
     # Get Version
     group_options.add_argument(
-        "-v", "--version", action="version", version="%(prog)s v1.0"
+        "-v", "--version", action="version", version="%(prog)s v2.0"
     )
     
     # Get help
