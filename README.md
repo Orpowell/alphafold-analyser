@@ -3,36 +3,29 @@
 AlphaFold Analyser is a command line tool to produce high quality visualisations of protein structures predicted by AlphaFold2. These visualisations allow the user to view the pLDDT of each residue of a protein structure and the predicted alignment error for the entire protein to rapidly infer the quality of a predicted structure. Alphafold analyser can process the results of both multimer and monomer predictions.
 
 The following software is required:
-- Conda
+- Python >= 3.7
 - PyMol == 2.5.2
+- Matplotlib==3.5.1
 
-### *This tool has been forked and modified from the original [AlphaFold Analyser](https://github.com/Orpowell/alphafold-analyser) repo.*
+## Installing AlphaFold Analyser on Linux & MacOSX
 
-<br>
+At the command line, change directory to the directory where alphafold-analyser.py was downloaded, , using the full path name.
 
-## Installation
-Installing the analysis environment requires Conda to be installed first.
+	cd <download-directory>
 
-To install:
-```bash
-# Clone repo
-git clone https://github.com/rj-price/alphafold-analyser.git 
+Now move the file to where you normally keep your binaries. This directory should be in your path. Note: you may require administrative privileges to do this (either switching user to root or by using sudo).
 
-# Change to directory
-cd alphafold-analyser
+As root:
 
-# Create conda environment
-conda create --name alphafold-analyser python==3.8
+	mv alphafold-analyser.py /usr/local/bin/
 
-# Activate environment
-conda activate alphafold-analyser
+As regular user:
 
-# Install dependencies
-conda install -y cudatoolkit==11.2.2 numpy==1.21.6 pandas==1.3.4 matplotlib==3.5.1
-pip install --upgrade --no-cache-dir jax==0.3.25 jaxlib==0.3.25+cuda11.cudnn805 -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
-```
+	sudo mv alphafold-analyser.py /usr/local/bin/
 
-<br>
+alphafold-analyser.py should now run from the shell or Terminal using the command alphafold-analyser.py
+
+Alternatively, alphafold-analyser.py can be run directly from an IDE.
 
 ## Usage
 
@@ -40,7 +33,7 @@ pip install --upgrade --no-cache-dir jax==0.3.25 jaxlib==0.3.25+cuda11.cudnn805 
 
 When running alphafold analyser, please ensure the structure and pickle file used are for the same prediction. All commands require an output directory to be specified (-o or —output_directory) and can be run simultaneously.  
 
-```bash
+```
 alphafold-analyser.py \
 	--pkl protein.pkl \
 	--pdb protein.pdb \
@@ -64,7 +57,7 @@ The script accepts the following command line arguments:
 ### Creating a pLDDT annotated structure
 A pLDDT annotated structure can be generated using the following command:
 
-```bash
+```
 alphafold-analyser.py \
 	--pdb protein.pdb \
 	--binary path/to/pymol/binary \
@@ -74,40 +67,26 @@ alphafold-analyser.py \
 ### Generating a predicted alignment error and pLDDT plot
 A PAE plot can be generated using the following command:
 
-```bash
-alphafold-analyser.py \
-	--pkl protein.pkl \
-	--output my_directory
-```
+
+	alphafold-analyser.py \
+		--pkl protein.pkl \
+		--output my_directory
+
 
 ### Running both analyses simultaneously
 You can run both analyses in a single command:
 
-```bash
-alphafold-analyser.py \
-	--pkl protein.pkl \
-	--pdb protein.pdb \
-	--binary path/to/pymol/binary \
-	--output my_directory
-```
 
-### Using the SLURM Submission Script
+	alphafold-analyser.py \
+		--pkl protein.pkl \
+		--pdb protein.pdb \
+		--binary path/to/pymol/binary \
+		--output my_directory
 
-The repository includes a SLURM submission script (`alphafold_analyser_submit.sh`) for running the analyser. To use this script, you'll need to modify the following environment variables:
-
-1. `AppDir`: Path to the directory where the AlphaFold Analyser is installed
-2. `PymolBin`: Path to the PyMOL binary in your environment
-
-To submit the job, use:
-```bash
-sbatch alphafold_analyser_submit.sh protein.pkl protein.pdb output_directory
-```
-
-<br>
 
 ## Outputs
 
-![outputs](https://github.com/rj-price/alphafold-analyser/blob/main/img/outputs.png)
+![outputs](https://github.com/orpowell/alphafold-analyser/blob/main/img/outputs.png)
 
 AlphaFold Analyser creates the following outputs:
 
