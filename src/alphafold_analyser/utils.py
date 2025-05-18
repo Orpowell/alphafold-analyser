@@ -1,0 +1,38 @@
+import os
+import pickle
+
+# Output Multimer specific stats if present
+def multimer_stats(data):
+    ptm = data["ptm"]
+    iptm = data["iptm"]
+    # [0.8 ipTM + 0.2 pTM] from Homma et al. 2023
+    # Ratio > 0.75 is considered a good prediction of interaction
+    ratio = (0.8 * iptm) + (0.2 * ptm)
+    print("\n#### Multimer Stats ####")
+    print(f"pTM: {ptm:.3f}")
+    print(f"ipTM: {iptm:.3f}")
+    print(f"[0.8 ipTM + 0.2 pTM]: {ratio:.3f}")
+    
+# Checks if a file exists
+def is_valid_file(parser, arg):
+    if not os.path.exists(arg):
+        parser.error(f"Input file ({arg}) not found!")
+
+    else:
+        return arg
+
+# Unpickle file and return dictionary
+def depickler(pickle_input):
+    try:
+        with open(pickle_input, "rb") as f:
+            return pickle.load(f)
+
+    except EOFError:
+        print(
+            "\nERROR: Data could not be found, predicted aligned error plotting failed."
+        )
+
+    except FileNotFoundError:
+        print(
+            "\nERROR: File could not be found, predicted aligned error plotting failed."
+        )
