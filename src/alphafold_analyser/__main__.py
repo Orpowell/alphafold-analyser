@@ -77,7 +77,6 @@ def main():
 
     # Parse arguments
     args = parser.parse_args()
-    input_list = [args.pkl, args.pdb, args.output]
 
     # If all arguments are None display help text by parsing help
     
