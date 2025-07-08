@@ -1,5 +1,6 @@
 import os
 import pickle
+import json
 
 # Output Multimer specific stats if present
 def multimer_stats(data):
@@ -32,7 +33,12 @@ def depickler(pickle_input):
             "\nERROR: Data could not be found, predicted aligned error plotting failed."
         )
 
-    except FileNotFoundError:
+def load_json(input):
+    try:
+        with open(input, "rb") as f:
+            return json.load(f)
+    
+    except EOFError:
         print(
-            "\nERROR: File could not be found, predicted aligned error plotting failed."
-        )
+            "\nERROR: Data could not be found, predicted aligned error plotting failed."
+        ) 

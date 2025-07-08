@@ -1,19 +1,26 @@
-from .utils import depickler
+from .utils import depickler, load_json
+
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 
 # Plot Predicted Aligned Error
-def plot_PAE(pickle, output):
+def plot_PAE(pickle:str, output:str, alphafold3:bool):
     
-    data = depickler(pickle_input=pickle)
+    if not alphafold3:
+        data = depickler(pickle_input=pickle)
+    
+    if alphafold3:
+        data = load_json(input=pickle)
+        data["predicted_aligned_error"] = data['pae']
+        data.pop('pae')
     
     fig, ax = plt.subplots(figsize=(6, 6))
     ax.set_facecolor("white")  
     cmap = ax.imshow(
         data["predicted_aligned_error"],
         vmin=0,
-        vmax=data["max_predicted_aligned_error"],
+        vmax=max(max(v) for v in data["predicted_aligned_error"]),
         cmap="Greens_r",
     )  
     ax.set_xlabel("Scored residue")  

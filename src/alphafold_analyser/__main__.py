@@ -52,6 +52,14 @@ def main():
         default=None
     )
     
+    common_inputs_parser.add_argument(
+        "-af3",
+        "--alphafold3",
+        action="store_true",
+        help="Analyse AlphaFold3 data (json)",
+        required=False,
+    )
+    
     plddt_parser = sub_parsers.add_parser("plddt", parents=[common_inputs_parser])
     
     plddt_parser.add_argument(
@@ -121,17 +129,17 @@ def main():
     
     if args.command == "plddt":
         print("\nPlotting plddt...")
-        plot_pLDDT(args.pkl, args.output)
+        plot_pLDDT(args.pkl, args.output, args.alphafold3)
         
     
     if args.command == 'pae':
         print("\nPlotting predicted aligned error...")
-        plot_PAE(args.pkl, args.output) 
+        plot_PAE(args.pkl, args.output, args.alphafold3) 
         
     
     if args.command == 'structure':
         print("\nVisualising pLDDT data...")
-        protein_painter(args.structure, args.output, args.binary)
+        protein_painter(args.structure, args.output, args.binary, args.alphafold3)
     
     sys.exit(0)
 

@@ -5,7 +5,7 @@ from matplotlib.patches import Rectangle
 from .utils import multimer_stats
 
 # Plot plDDT
-def plot_pLDDT(pickle, output):
+def plot_pLDDT(pickle, output, alphafold3:bool):
     
     data = depickler(pickle_input=pickle)
     
