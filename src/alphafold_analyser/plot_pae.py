@@ -5,7 +5,7 @@ from matplotlib.patches import Rectangle
 from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 
 # Plot Predicted Aligned Error
-def plot_PAE(pickle:str, output:str, alphafold3:bool):
+def plot_PAE(pickle:str, output:str, alphafold3:bool, plot_contacts:bool):
     
     if not alphafold3:
         data = depickler(pickle_input=pickle)
@@ -13,7 +13,10 @@ def plot_PAE(pickle:str, output:str, alphafold3:bool):
     if alphafold3:
         data = load_json(input=pickle)
         data["predicted_aligned_error"] = data['pae']
-        data.pop('pae')
+        
+        if plot_contacts:
+            data["predicted_aligned_error"] = data['contact_probs']
+            
     
     fig, ax = plt.subplots(figsize=(6, 6))
     ax.set_facecolor("white")  

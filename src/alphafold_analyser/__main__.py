@@ -31,33 +31,14 @@ def main():
     common_inputs_parser = argparse.ArgumentParser(add_help=False)
     
     common_inputs_parser.add_argument(
-        "-l",
-        "--pkl",
+        "-d",
+        "--data",
         metavar="\b",
         type=lambda x: is_valid_file(parser, x),
         action="store",
-        help="path to PKL file",
+        help="path to prediciton data: *.pkl (AF2) or *.json (AF3)",
         required=False,
         default=None
-    )
-
-    common_inputs_parser.add_argument(
-        "-j",
-        "--json",
-        metavar="\b",
-        type=lambda x: is_valid_file(parser, x),
-        action="store",
-        help="path to JSON file",
-        required=False,
-        default=None
-    )
-    
-    common_inputs_parser.add_argument(
-        "-af3",
-        "--alphafold3",
-        action="store_true",
-        help="Analyse AlphaFold3 data (json)",
-        required=False,
     )
     
     plddt_parser = sub_parsers.add_parser("plddt", parents=[common_inputs_parser])
@@ -72,7 +53,31 @@ def main():
         default="plddt.png"
     )
     
+    plddt_parser.add_argument(
+        "-af3",
+        "--alphafold3",
+        action="store_true",
+        help="Analyse AlphaFold3 data (json)",
+        required=False,
+    )
+    
     pae_parser = sub_parsers.add_parser("pae", parents=[common_inputs_parser])
+    
+    pae_parser.add_argument(
+        "-af3",
+        "--alphafold3",
+        action="store_true",
+        help="Analyse AlphaFold3 data (json)",
+        required=False
+    )
+    
+    pae_parser.add_argument(
+        "-pc",
+        "--plot_contacts",
+        action="store_true",
+        help="Plot contact data instead of predicted aligned error",
+        required=False,
+    )
     
     pae_parser.add_argument(
         "-o",
@@ -84,7 +89,7 @@ def main():
         default="PAE.png"
     )
     
-    structure_parser = sub_parsers.add_parser("structure", parents=[common_inputs_parser])
+    structure_parser = sub_parsers.add_parser("structure")
     
     structure_parser.add_argument(
         "-s",
@@ -119,27 +124,28 @@ def main():
     # Parse arguments
     args = parser.parse_args()
     
-    # If all arguments are None display help text by parsing help
-    if (args.pkl is None) and (args.json is None):
-        parser.parse_args(["-h"])
-        
-    if (args.pkl is not None) and (args.json is not None):
-        print("\nCan't parse json and pkl data at the same time!")
-        parser.parse_args(["-h"])
+    if args.command == 'structure':
+        print("\nVisualising pLDDT data...")
+        protein_painter(args.structure, args.output, args.binary)
+        sys.exit(0)
     
     if args.command == "plddt":
         print("\nPlotting plddt...")
-        plot_pLDDT(args.pkl, args.output, args.alphafold3)
-        
+        plot_pLDDT(args.data, args.output, args.alphafold3)
+    
+    if (args.plot_contacts is True) and (args.alphafold3 is False):
+        print("\nContacts can only be plotted for AlphaFold3 predictions!")
+        parser.parse_args(["-h"])
+        sys.exit(1)
     
     if args.command == 'pae':
-        print("\nPlotting predicted aligned error...")
-        plot_PAE(args.pkl, args.output, args.alphafold3) 
+        if args.plot_contacts:
+            print("\nPlotting contacts...")
         
-    
-    if args.command == 'structure':
-        print("\nVisualising pLDDT data...")
-        protein_painter(args.structure, args.output, args.binary, args.alphafold3)
+        if args.plot_contacts is False:
+            print("\nPlotting predicted aligned error...")
+        
+        plot_PAE(args.data, args.output, args.alphafold3, args.plot_contacts) 
     
     sys.exit(0)
 
