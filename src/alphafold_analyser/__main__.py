@@ -36,7 +36,7 @@ def main():
         metavar="\b",
         type=lambda x: is_valid_file(parser, x),
         action="store",
-        help="path to pkl file - can generate both PAE and PLDDT plots",
+        help="path to PKL file",
         required=False,
         default=None
     )
@@ -47,68 +47,95 @@ def main():
         metavar="\b",
         type=lambda x: is_valid_file(parser, x),
         action="store",
-        help="path to json file - can generate both PAE and PLDDT plots",
+        help="path to JSON file",
         required=False,
         default=None
     )
     
-    common_inputs_parser.add_argument(
+    plddt_parser = sub_parsers.add_parser("plddt", parents=[common_inputs_parser])
+    
+    plddt_parser.add_argument(
         "-o",
         "--output",
         metavar="\b",
         type=str,
         action="store",
-        help="directory to store all generated outputs",
-        default="analyser_output",
+        help="Predicted aligned error (PAE) plot [*.svg, *.png]",
+        default="plddt.png"
     )
     
-    protein_input_parser = argparse.ArgumentParser(add_help=False)
+    pae_parser = sub_parsers.add_parser("pae", parents=[common_inputs_parser])
     
-    protein_input_parser.add_argument(
-        "-p",
-        "--pdb",
+    pae_parser.add_argument(
+        "-o",
+        "--output",
+        metavar="\b",
+        type=str,
+        action="store",
+        help="Predicted aligned error (PAE) plot [*.svg, *.png]",
+        default="PAE.png"
+    )
+    
+    structure_parser = sub_parsers.add_parser("structure", parents=[common_inputs_parser])
+    
+    structure_parser.add_argument(
+        "-s",
+        "--structure",
         metavar="\b",
         type=lambda x: is_valid_file(parser, x),
         action="store",
-        help="path to pdb file - generates pLDDT coloured structure",
-        default=None
+        help="path to protein structure file [*.pdb, *.cif]",
+        required=True
     )
     
-    protein_input_parser.add_argument(
+    structure_parser.add_argument(
         "-b",
         "--binary",
         metavar="\b",
         type=str,
         action="store",
-        help="path to pymol binary - Only required for analysing pdb (-p)",
-        default=None,
+        help="path to pymol binary",
+        required=True
     )
     
-    sub_parsers.add_parser("plddt", parents=[common_inputs_parser])
-    sub_parsers.add_parser("pae", parents=[common_inputs_parser])
-    sub_parsers.add_parser("structure", parents=[common_inputs_parser, protein_input_parser])
+    structure_parser.add_argument(
+        "-o",
+        "--output",
+        metavar="\b",
+        type=str,
+        action="store",
+        help="Pymol session",
+        default="protein.pse"
+    )
     
     # Parse arguments
     args = parser.parse_args()
     
     # If all arguments are None display help text by parsing help
-    
     if (args.pkl is None) and (args.json is None):
+        parser.parse_args(["-h"])
+        
+    if (args.pkl is not None) and (args.json is not None):
+        print("\nCan't parse json and pkl data at the same time!")
         parser.parse_args(["-h"])
     
     if args.command == "plddt":
         print("\nPlotting plddt...")
         plot_pLDDT(args.pkl, args.output)
+        
     
     if args.command == 'pae':
         print("\nPlotting predicted aligned error...")
         plot_PAE(args.pkl, args.output) 
+        
     
     if args.command == 'structure':
         print("\nVisualising pLDDT data...")
         protein_painter(args.pdb, args.output, args.binary)
-
+    
     sys.exit(0)
+
+    
 
 
 if __name__ == "__main__":
