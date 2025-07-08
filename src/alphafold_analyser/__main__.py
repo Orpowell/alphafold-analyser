@@ -37,7 +37,19 @@ def main():
         type=lambda x: is_valid_file(parser, x),
         action="store",
         help="path to pkl file - can generate both PAE and PLDDT plots",
-        required=True
+        required=False,
+        default=None
+    )
+
+    common_inputs_parser.add_argument(
+        "-j",
+        "--json",
+        metavar="\b",
+        type=lambda x: is_valid_file(parser, x),
+        action="store",
+        help="path to json file - can generate both PAE and PLDDT plots",
+        required=False,
+        default=None
     )
     
     common_inputs_parser.add_argument(
@@ -81,19 +93,8 @@ def main():
     
     # If all arguments are None display help text by parsing help
     
-    if (args.pkl is None):
+    if (args.pkl is None) and (args.json is None):
         parser.parse_args(["-h"])
-    
-    # Check output directory exists
-    if not os.path.exists(args.output):
-        try:
-            os.makedirs(args.output)
-            
-        except Exception as e:
-            print(f"\nERROR: failed to create output directory {args.output}: {str(e)}")
-            sys.exit(1)
-    
-    print(f"\nOutput directory: {args.output}")
     
     if args.command == "plddt":
         print("\nPlotting plddt...")
