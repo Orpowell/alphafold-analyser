@@ -49,5 +49,5 @@ def plot_pLDDT(pickle, output):
     if 'iptm' in data.keys():
         multimer_stats(data)
 
-    plt.savefig(f"{output}/plddt.png", dpi=1000, bbox_inches="tight")
+    plt.savefig(f"{output}", dpi=300, bbox_inches="tight")
 

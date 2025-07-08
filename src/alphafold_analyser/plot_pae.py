@@ -24,4 +24,4 @@ def plot_PAE(pickle, output):
     cbar = fig.colorbar(cmap, cax=axins, orientation="horizontal")  
     cbar.set_label("Expected position error (Ångströms)")
 
-    plt.savefig(f"{output}/PAE.png", dpi=1000, bbox_inches="tight")
+    plt.savefig(f"{output}", dpi=300, bbox_inches="tight")
