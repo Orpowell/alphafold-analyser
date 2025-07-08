@@ -49,7 +49,7 @@ def main():
         metavar="\b",
         type=str,
         action="store",
-        help="Predicted aligned error (PAE) plot [*.svg, *.png]",
+        help="Predicted aligned error (PAE) plot [*.png]",
         default="plddt.png"
     )
     
@@ -85,7 +85,7 @@ def main():
         metavar="\b",
         type=str,
         action="store",
-        help="Predicted aligned error (PAE) plot [*.svg, *.png]",
+        help="Predicted aligned error (PAE) plot [*.png]",
         default="PAE.png"
     )
     
@@ -122,7 +122,7 @@ def main():
     )
     
     # Parse arguments
-    args = parser.parse_args()
+    args = parser.parse_args(sys.argv[1:] or ['--help'])
     
     if args.command == 'structure':
         print("\nVisualising pLDDT data...")
@@ -132,6 +132,7 @@ def main():
     if args.command == "plddt":
         print("\nPlotting plddt...")
         plot_pLDDT(args.data, args.output, args.alphafold3)
+        sys.exit(0)
     
     if (args.plot_contacts is True) and (args.alphafold3 is False):
         print("\nContacts can only be plotted for AlphaFold3 predictions!")
@@ -145,11 +146,8 @@ def main():
         if args.plot_contacts is False:
             print("\nPlotting predicted aligned error...")
         
-        plot_PAE(args.data, args.output, args.alphafold3, args.plot_contacts) 
-    
-    sys.exit(0)
-
-    
+        plot_PAE(args.data, args.output, args.alphafold3, args.plot_contacts)
+        sys.exit(0)
 
 
 if __name__ == "__main__":
