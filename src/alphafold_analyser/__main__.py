@@ -134,12 +134,13 @@ def main():
         plot_pLDDT(args.data, args.output, args.alphafold3)
         sys.exit(0)
     
-    if (args.plot_contacts is True) and (args.alphafold3 is False):
-        print("\nContacts can only be plotted for AlphaFold3 predictions!")
-        parser.parse_args(["-h"])
-        sys.exit(1)
-    
     if args.command == 'pae':
+        
+        if (args.plot_contacts is True) and (args.alphafold3 is False):
+            print("\nContacts can only be plotted for AlphaFold3 predictions!")
+            parser.parse_args(["-h"])
+            sys.exit(1)
+        
         if args.plot_contacts:
             print("\nPlotting contacts...")
         
