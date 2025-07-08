@@ -131,7 +131,7 @@ def main():
     
     if args.command == 'structure':
         print("\nVisualising pLDDT data...")
-        protein_painter(args.pdb, args.output, args.binary)
+        protein_painter(args.structure, args.output, args.binary)
     
     sys.exit(0)
 
