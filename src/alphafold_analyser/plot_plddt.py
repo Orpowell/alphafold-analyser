@@ -1,13 +1,17 @@
-from .utils import depickler
+from .utils import depickler, multimer_stats, load_json
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 
-from .utils import multimer_stats
 
 # Plot plDDT
 def plot_pLDDT(pickle, output, alphafold3:bool):
     
-    data = depickler(pickle_input=pickle)
+    if alphafold3 is False:
+        data = depickler(pickle_input=pickle)
+    
+    if alphafold3:
+        data = load_json(pickle)
+        data["plddt"] = data['atom_plddts']
     
     fig, ax = plt.subplots(figsize=(20, 5))
 
@@ -21,14 +25,26 @@ def plot_pLDDT(pickle, output, alphafold3:bool):
     ax.add_patch(Rectangle((0, 50), max_length, 20, color="#f37842"))
     ax.add_patch(Rectangle((0, 0), max_length, 50, color="#f9d613"))
 
-    ax.plot(
+    if alphafold3:
+        ax.plot(
         position,
         plddt,
         color="black",
-        linewidth=2,
+        linewidth=0.5,
         linestyle="-"
-    )
-
+        )
+        ax.set_xlabel("Atom Position")
+    
+    if alphafold3 is False:   
+        ax.plot(
+            position,
+            plddt,
+            color="black",
+            linewidth=2,
+            linestyle="-"
+        )
+        ax.set_xlabel("Amino Acid Position")
+        
     ax.set_ylim(0, 100)
     ax.set_xlim(1, max(position) + 10)
     ax.spines[["right", "top"]].set_visible(False)
@@ -43,7 +59,6 @@ def plot_pLDDT(pickle, output, alphafold3:bool):
 
     ax.legend(plddt_legend, title="pLDDT Confidence", prop={'size': 16}, bbox_to_anchor=(-0.05, 1))
 
-    ax.set_xlabel("Amino Acid Position")
     ax.set_ylabel("pLDDT")
     
     if 'iptm' in data.keys():
