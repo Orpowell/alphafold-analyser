@@ -84,9 +84,9 @@ def main():
         default=None,
     )
     
-    plddt_parser = sub_parsers.add_parser("plddt", parents=[common_inputs_parser])
-    pae_parser = sub_parsers.add_parser("pae", parents=[common_inputs_parser])
-    structure_parser = sub_parsers.add_parser("structure", parents=[common_inputs_parser, protein_input_parser])
+    sub_parsers.add_parser("plddt", parents=[common_inputs_parser])
+    sub_parsers.add_parser("pae", parents=[common_inputs_parser])
+    sub_parsers.add_parser("structure", parents=[common_inputs_parser, protein_input_parser])
     
     # Parse arguments
     args = parser.parse_args()
