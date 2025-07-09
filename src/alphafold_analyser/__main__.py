@@ -28,7 +28,7 @@ def main():
     
     # Help
     parser.add_argument(
-        "-h", "--help", action="help", help="show this help message and exit\n "
+        "-h", "--help", action="help", help="Show this help message and exit\n "
     )
     
     common_inputs_parser = argparse.ArgumentParser(add_help=False)
@@ -39,7 +39,7 @@ def main():
         metavar="\b",
         type=lambda x: is_valid_file(parser, x),
         action="store",
-        help="path to prediciton data: *.pkl (AF2) or *.json (AF3)",
+        help="Path to prediciton data: *.pkl (AF2) or *.json (AF3)",
         required=False,
         default=None
     )
@@ -134,6 +134,12 @@ def main():
         logging.info("Task complete...")
         sys.exit(0)
     
+    if args.data is None:
+        logging.error("No prediction data specified...")
+        print("")
+        parser.parse_args(["-h"])
+        sys.exit(1)
+    
     if args.command == "plddt":
         logging.info("Plotting plddt...")
         plot_pLDDT(args.data, args.output, args.alphafold3)
@@ -143,7 +149,7 @@ def main():
     if args.command == 'pae':
         
         if (args.plot_contacts is True) and (args.alphafold3 is False):
-            logging.error("Contacts can only be plotted for AlphaFold3 predictions!")
+            logging.error("Contacts can only be plotted for AlphaFold3 predictions...")
             parser.parse_args(["-h"])
             sys.exit(1)
         
