@@ -1,5 +1,4 @@
 import argparse
-import os
 import sys
 
 from .plot_plddt import plot_pLDDT
