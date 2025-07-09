@@ -1,11 +1,15 @@
 import argparse
 import sys
+import logging
 
 from .plot_plddt import plot_pLDDT
 from .paint_protein import protein_painter
 from .plot_pae import plot_PAE
 from .utils import *
 from .__init__ import __version__
+
+logging.basicConfig(stream=sys.stdout, format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S',
+                    level=logging.INFO)
 
 def main():
     
@@ -125,33 +129,33 @@ def main():
     splash(args)
 
     if args.command == 'structure':
-        print("\nVisualising pLDDT data...")
+        logging.info("Visualising pLDDT data...")
         protein_painter(args.structure, args.output, args.binary)
-        print("Task complete...")
+        logging.info("Task complete...")
         sys.exit(0)
     
     if args.command == "plddt":
-        print("\nPlotting plddt...")
+        logging.info("Plotting plddt...")
         plot_pLDDT(args.data, args.output, args.alphafold3)
-        print("Task complete...")
+        logging.info("Task complete...")
         sys.exit(0)
     
     if args.command == 'pae':
         
         if (args.plot_contacts is True) and (args.alphafold3 is False):
-            print("\nContacts can only be plotted for AlphaFold3 predictions!")
+            logging.error("Contacts can only be plotted for AlphaFold3 predictions!")
             parser.parse_args(["-h"])
             sys.exit(1)
         
         if args.plot_contacts:
-            print("\nPlotting contacts...")
+            logging.info("Plotting contacts...")
         
         if args.plot_contacts is False:
-            print("\nPlotting predicted aligned error...")
+            logging.info("Plotting predicted aligned error...")
         
         plot_PAE(args.data, args.output, args.alphafold3, args.plot_contacts)
         
-        print("Task complete...")
+        logging.info("Task complete...")
         
         sys.exit(0)
 

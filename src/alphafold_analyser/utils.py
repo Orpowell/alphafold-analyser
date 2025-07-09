@@ -1,6 +1,8 @@
 import os
 import pickle
 import json
+import logging
+
 from .__init__ import __version__
 
 # Output Multimer specific stats if present
@@ -30,8 +32,8 @@ def depickler(pickle_input):
             return pickle.load(f)
 
     except EOFError:
-        print(
-            "\nERROR: Data could not be found, predicted aligned error plotting failed."
+        logging.error(
+            "Data could not be found, predicted aligned error plotting failed."
         )
 
 def load_json(input):
@@ -40,7 +42,7 @@ def load_json(input):
             return json.load(f)
     
     except EOFError:
-        print(
+        logging.error(
             "\nERROR: Data could not be found, predicted aligned error plotting failed."
         )
 
@@ -48,7 +50,7 @@ def splash(args) -> None:
     
     command = None
     
-    print(f"""
+    print(f"""\n
 ############################
 # AlphaFold-Analyser v{__version__}#
 ############################""")
@@ -65,3 +67,4 @@ def splash(args) -> None:
             continue
     
         print(f"{k}: {v}")
+    print("")
