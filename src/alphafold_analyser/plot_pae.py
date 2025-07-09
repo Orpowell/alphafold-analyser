@@ -5,15 +5,15 @@ from matplotlib.patches import Rectangle
 from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 
 # Plot Predicted Aligned Error
-def plot_PAE(pickle:str, output:str, alphafold3:bool, plot_contacts:bool):
+def plot_PAE(input:str, output:str, alphafold3:bool, plot_contacts:bool):
     
     cmap = "Greens_r"
 
     if not alphafold3:
-        data = depickler(pickle_input=pickle)
+        data = depickler(input)
     
     if alphafold3:
-        data = load_json(input=pickle)
+        data = load_json(input)
         data["predicted_aligned_error"] = data['pae']
         
         if plot_contacts:

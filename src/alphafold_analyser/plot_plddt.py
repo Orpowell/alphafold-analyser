@@ -4,13 +4,13 @@ from matplotlib.patches import Rectangle
 
 
 # Plot plDDT
-def plot_pLDDT(pickle, output, alphafold3:bool):
+def plot_pLDDT(input, output, alphafold3:bool):
     
     if alphafold3 is False:
-        data = depickler(pickle_input=pickle)
+        data = depickler(input)
     
     if alphafold3:
-        data = load_json(pickle)
+        data = load_json(input)
         data["plddt"] = data['atom_plddts']
     
     fig, ax = plt.subplots(figsize=(20, 5))
