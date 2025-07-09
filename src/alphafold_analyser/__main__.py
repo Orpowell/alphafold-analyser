@@ -123,15 +123,18 @@ def main():
     
     # Parse arguments
     args = parser.parse_args(sys.argv[1:] or ['--help'])
-    
+    splash(args)
+
     if args.command == 'structure':
         print("\nVisualising pLDDT data...")
         protein_painter(args.structure, args.output, args.binary)
+        print("Task complete...")
         sys.exit(0)
     
     if args.command == "plddt":
         print("\nPlotting plddt...")
         plot_pLDDT(args.data, args.output, args.alphafold3)
+        print("Task complete...")
         sys.exit(0)
     
     if args.command == 'pae':
@@ -148,6 +151,9 @@ def main():
             print("\nPlotting predicted aligned error...")
         
         plot_PAE(args.data, args.output, args.alphafold3, args.plot_contacts)
+        
+        print("Task complete...")
+        
         sys.exit(0)
 
 

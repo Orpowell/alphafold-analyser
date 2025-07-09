@@ -1,6 +1,7 @@
 import os
 import pickle
 import json
+from .__init__ import __version__
 
 # Output Multimer specific stats if present
 def multimer_stats(data):
@@ -41,4 +42,26 @@ def load_json(input):
     except EOFError:
         print(
             "\nERROR: Data could not be found, predicted aligned error plotting failed."
-        ) 
+        )
+
+def splash(args) -> None:
+    
+    command = None
+    
+    print(f"""
+############################
+# AlphaFold-Analyser v{__version__}#
+############################""")
+    
+    for k, v in vars(args).items():
+        
+        if k == 'command':
+            command = v
+
+        if k == "plot_contacts" and (command != 'pae'):
+            continue
+        
+        if k == "alphafold3" and (command == 'structure'):
+            continue
+    
+        print(f"{k}: {v}")
