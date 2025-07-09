@@ -7,6 +7,8 @@ from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 # Plot Predicted Aligned Error
 def plot_PAE(pickle:str, output:str, alphafold3:bool, plot_contacts:bool):
     
+    cmap = "Greens_r"
+
     if not alphafold3:
         data = depickler(pickle_input=pickle)
     
@@ -16,6 +18,7 @@ def plot_PAE(pickle:str, output:str, alphafold3:bool, plot_contacts:bool):
         
         if plot_contacts:
             data["predicted_aligned_error"] = data['contact_probs']
+            cmap = "Greens"
             
     
     fig, ax = plt.subplots(figsize=(6, 6))
@@ -24,7 +27,7 @@ def plot_PAE(pickle:str, output:str, alphafold3:bool, plot_contacts:bool):
         data["predicted_aligned_error"],
         vmin=0,
         vmax=max(max(v) for v in data["predicted_aligned_error"]),
-        cmap="Greens_r",
+        cmap=cmap,
     )  
     ax.set_xlabel("Scored residue")  
     ax.set_ylabel("Aligned residue")  
