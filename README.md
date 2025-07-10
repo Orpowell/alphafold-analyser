@@ -7,9 +7,9 @@ AlphaFold Analyser is a command line tool that produces publication quality visu
 AlphaFold Analyser can be easily installed using conda and the following commands:
 
 	conda create -n alphafold-analyser python=3.10.16
+ 	conda activate alphafold-analyser
 	conda install conda-forge::pymol-open-source
-
-	conda activate alphafold-analyser
+	
 	git clone https://github.com/Orpowell/alphafold-analyser.git
 	cd alphafold-analyser
 	pip install .
