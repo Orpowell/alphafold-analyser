@@ -6,7 +6,7 @@ def protein_painter(pdb_input, output, pymol_binary):
     # File path for the PyMol session
 
     color_plddt = (
-        " color 0x024fcc, b < 100; color 0x60c2e8, b < 90; color 0xf37842, b < 70;  color 0xf9d613, b < 50"
+        " color 0x024fcc, b < 100; color 0x60c2e8, b < 90; color 0xf9d613, b < 70;  color 0xf37842, b < 50"
     )
 
     # Terminal Command to open pdb file, color protein by pLDDT (b-factor) and save the session in the output directory
