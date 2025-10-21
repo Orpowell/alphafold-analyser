@@ -64,13 +64,13 @@ The plddt command generates a plddt plot of a prediction. In AlphaFold2, plddt d
 
 AlphaFold2:
 
-	alphafold-analyser pae \
+	alphafold-analyser plddt \
 		--data prediction.pkl \
 		--output pae.png
 
 AlphaFold3:
 
-	alphafold-analyser pae \
+	alphafold-analyser plddt \
 		--data prediction_full_data_x.json \
 		--output pae.png \
 		--alphafold3
@@ -90,7 +90,7 @@ The plddt command accepts the following arguments:
 
 The structure command creates a PyMol session of a prediction and colours the prediction using plddt values. The command works with both \*.cif and \*.pdb files. Unlike, the pae and plddt commands, the version of AlphaFold used does not need to be specified. On linux systems, the location of your PyMol binary can be found using the command *where pymol*. We recommend using the open-source binary installed in the conda environment (See: Installing AlphaFold Analyser).
 
-	alphafold-analyser pae \
+	alphafold-analyser structure \
 		--structure prediction.pdb \
 		--binary /path/to/pymol/binary \
 		--output plddt.pse \
