@@ -22,8 +22,8 @@ def plot_pLDDT(input, output, alphafold3:bool):
     # Confidence boundaries
     ax.add_patch(Rectangle((0, 90), max_length, 10, color="#024fcc"))
     ax.add_patch(Rectangle((0, 70), max_length, 20, color="#60c2e8"))
-    ax.add_patch(Rectangle((0, 50), max_length, 20, color="#f37842"))
-    ax.add_patch(Rectangle((0, 0), max_length, 50, color="#f9d613"))
+    ax.add_patch(Rectangle((0, 50), max_length, 20, color="#f9d613"))
+    ax.add_patch(Rectangle((0, 0), max_length, 50, color="#f37842"))
 
     if alphafold3:
         ax.plot(
@@ -53,8 +53,8 @@ def plot_pLDDT(input, output, alphafold3:bool):
     plddt_legend = {
         "Very high (pLDDT > 90)": "#024fcc",
         "High (90 > pLDDT > 70)": "#60c2e8",
-        "Low (70 > pLDDT > 50)": "#f37842",
-        "Very low (pLDDT < 50)": "#f9d613",
+        "Low (70 > pLDDT > 50)": "#f9d613",
+        "Very low (pLDDT < 50)": "#f37842",
     }
 
     ax.legend(plddt_legend, title="pLDDT Confidence", prop={'size': 16}, bbox_to_anchor=(-0.05, 1))
